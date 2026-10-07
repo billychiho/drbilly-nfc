@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. C.H. Ng, Billy — 聯絡卡</title>
+<style>
+  :root{
+    --navy:#1f3a5f; --teal:#0d9488; --ink:#1f2933; --muted:#6b7280;
+    --line:#e5e9f0; --bg:#f4f7fb; --card:#ffffff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans CJK TC",Segoe UI,Roboto,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.5;
+    display:flex; justify-content:center; padding:24px 14px; min-height:100vh;
+  }
+  .card{
+    background:var(--card); width:100%; max-width:440px; border-radius:18px;
+    box-shadow:0 8px 30px rgba(31,58,95,.12); overflow:hidden;
+  }
+  .hero{
+    background:linear-gradient(135deg,var(--navy),var(--teal));
+    color:#fff; padding:30px 24px 26px; text-align:center;
+  }
+  .mono{
+    width:64px; height:64px; border-radius:50%; background:rgba(255,255,255,.16);
+    display:flex; align-items:center; justify-content:center; font-size:26px; font-weight:700;
+    margin:0 auto 14px; letter-spacing:1px;
+  }
+  .hero h1{font-size:20px; font-weight:700; letter-spacing:.3px}
+  .hero .zhname{font-size:15px; font-weight:600; opacity:.95; margin-top:6px; letter-spacing:1px}
+  .hero .cred{font-size:13px; opacity:.92; margin-top:4px}
+  .hero .spec{font-size:13px; opacity:.82; margin-top:8px}
+  .hero .spec-en{font-size:11px; opacity:.66; margin-top:3px}
+  .body{padding:8px 22px 10px}
+  .sec-h{
+    font-size:12px; font-weight:700; letter-spacing:1px; color:var(--teal);
+    margin:18px 4px 6px; text-transform:uppercase;
+  }
+  .row{
+    display:flex; align-items:center; gap:12px; padding:13px 4px;
+    border-bottom:1px solid var(--line); text-decoration:none; color:inherit;
+  }
+  .row:last-of-type{border-bottom:none}
+  .row .ico{width:34px; height:34px; flex:0 0 34px; border-radius:9px;
+    background:#eef4f8; color:var(--teal); display:flex; align-items:center; justify-content:center; font-size:16px}
+  .row .txt{flex:1; min-width:0}
+  .row .lbl{font-size:11px; color:var(--muted); letter-spacing:.5px}
+  .row .val{font-size:15px; font-weight:600; word-break:break-word}
+  .row .sub{font-size:11px; color:var(--muted)}
+  a.row:hover .val{color:var(--teal)}
+
+  .clinic{padding:12px 4px; border-bottom:1px solid var(--line)}
+  .clinic:last-child{border-bottom:none}
+  .clinic .nm{font-size:14px; font-weight:700}
+  .clinic .en{font-size:11px; color:var(--muted); margin-top:1px}
+  .clinic .ad{font-size:12px; color:var(--ink); margin-top:6px; word-break:break-word}
+  .clinic .ph{font-size:13px; font-weight:600; color:var(--teal); margin-top:4px; text-decoration:none; display:inline-block}
+  .soc{padding:11px 4px; border-bottom:1px solid var(--line)}
+  .soc:last-child{border-bottom:none}
+  .soc .nm{font-size:13px; font-weight:700}
+  .soc .en{font-size:11px; color:var(--muted); margin-top:1px}
+  .soc .rl{font-size:12px; color:var(--teal); margin-top:3px; font-weight:600}
+
+  .actions{padding:14px 22px 16px; display:flex; flex-direction:column; gap:10px}
+  .btn{
+    display:block; text-align:center; padding:13px; border-radius:11px; font-size:15px; font-weight:700;
+    text-decoration:none; cursor:pointer; border:none; width:100%;
+  }
+  .btn-primary{background:var(--teal); color:#fff}
+  .btn-ghost{background:#eef4f8; color:var(--navy)}
+  .qr{padding:6px 22px 24px; text-align:center}
+  .qr .box{display:inline-block; padding:12px; background:#fff; border:1px solid var(--line); border-radius:12px}
+  .qr img{display:block; width:200px; height:200px}
+  .qr .cap{font-size:12px; color:var(--muted); margin-top:10px}
+  .foot{padding:0 22px 22px; text-align:center; font-size:11px; color:var(--muted)}
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="hero">
+      <div class="mono">BN</div>
+      <h1>Dr. C.H. Ng, Billy</h1>
+      <div class="zhname">吳志豪 醫生</div>
+      <div class="cred">MBBS, DFM, MBA, PhD</div>
+      <div class="spec">澳門註冊西醫 ・ 全科 / 皮膚科 / 醫學美容 ・ 醫務顧問</div>
+      <div class="spec-en">Registered Medical Practitioner (Macao) ・ General Practice / Dermatology / Aesthetic Medicine ・ Medical Advisor</div>
+    </div>
+
+    <div class="body" id="body"></div>
+
+    <div class="actions">
+      <button class="btn btn-primary" id="saveBtn">加入聯絡人</button>
+      <a class="btn btn-ghost" id="shareBtn" href="#">分享此頁</a>
+    </div>
+
+    <div class="qr">
+      <div class="box"><img id="qr" alt="QR Code"></div>
+      <div class="cap">掃描上方 QR 即可分享此聯絡頁</div>
+    </div>
+
+    <div class="foot">僅供聯絡用途 ・ 碰觸 NFC 標籤自動開啟本頁</div>
+  </div>
+
+<script>
+const C = {
+  name:"Dr. C.H. Ng, Billy",
+  full:"Dr. C.H. Ng, Billy (MBBS, DFM, MBA, PhD)",
+  email:"billychiho@gmail.com",
+  phones:[
+    {t:"+853-62343615", label:"澳門", sub:"WhatsApp"},
+    {t:"+86-15920794895", label:"內地", sub:""},
+    {t:"+852-66514295", label:"香港", sub:""}
+  ],
+  clinics:[
+    {zh:"明雅醫務中心II", en:"CENTRO MÉDICO M.Y. II",
+     addr:"澳門美麗街18B 麗瓏大廈",
+     addrEn:"Rua Formosa 18-18B, EDF. LAI KENG, B R/C, Macao SAR",
+     tel:"+853-62343615"},
+    {zh:"明雅醫務中心", en:"CENTRO MÉDICO M.Y.",
+     addr:"澳門南灣大馬路599號羅德禮商業大廈C8",
+     addrEn:"AVENIDA DA PRAIA GRANDE, N.O 599, COMERCIAL RODRIGUES C8, MACAU",
+     tel:"28302619"},
+    {zh:"國檢(澳門)醫務中心", en:"CENTRO MÉDICO KUOK KIM (MACAU)",
+     addr:"澳門宋玉生廣場181-187號光輝商業中心4樓B,C,D座",
+     addrEn:"ALAMEDA DR. CARLOS D' ASSUMPCAO, NOS.181-187, JARDIM BRILHANTISMO, 4 ANDAR B,C,D, MACAU",
+     tel:"28725706"},
+    {zh:"國檢-工人聯合醫療中心", en:"KUOK KIM-CENTRO DE SAÚDE DA UNIÃO DOS OPERÁRIOS DE MACAU",
+     addr:"澳門宋玉生廣場181-187號光輝苑(光輝商業中心)K4及L4",
+     addrEn:"ALAMEDA DR. CARLOS D'ASSUMPÇÃO, N.OS 181-187, JARDIM BRILHANTISMO K4 E L4, MACAU",
+     tel:"28725706"},
+    {zh:"環宇醫療中心", en:"CENTRO MÉDICO GLOBALLMED",
+     addr:"澳門氹仔大連街389號寶龍花園地下I座",
+     addrEn:"RUA DE TAI LIN, NO.389, EDF. POU LONG FA UN, R/C-I, TAIPA, MACAU",
+     tel:"28282328"},
+    {zh:"葡京酒店醫療室", en:"Hotel Lisboa Medical Centre",
+     tel:"88033651"}
+  ],
+  societies:[
+    {zh:"粤港澳大灣區臨床醫學學會", en:"Clinical Medical Society of Guangdong-Hong Kong-Macao Great Bay Area",
+     role:"Vice-President 副會長"},
+    {zh:"澳門大灣區醫療工作者協會", en:"Macao Greater Bay Area Association of Healthcare Providers",
+     role:"Deputy Chairman 副理事長"}
+  ]
+};
+
+function esc(s){if(!s)return"";return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function macauTel(d){return "+853"+d.replace(/[^0-9]/g,"");}
+
+const out=[];
+// 個人聯絡
+out.push('<div class="sec-h">個人聯絡</div>');
+C.phones.forEach(p=>{
+  out.push(`<a class="row" href="tel:${p.t}"><div class="ico">☎</div>
+    <div class="txt"><div class="lbl">電話 ・ ${esc(p.label)}</div>
+    <div class="val">${esc(p.t)}</div>${p.sub?`<div class="sub">${esc(p.sub)}</div>`:""}</div></a>`);
+});
+out.push(`<a class="row" href="mailto:${C.email}"><div class="ico">✉</div>
+  <div class="txt"><div class="lbl">電郵</div><div class="val">${esc(C.email)}</div></div></a>`);
+
+// 診所網絡
+out.push('<div class="sec-h">診所網絡（'+C.clinics.length+'）</div>');
+C.clinics.forEach(c=>{
+  out.push(`<div class="clinic">
+    <div class="nm">${esc(c.zh)}</div>
+    ${c.en?`<div class="en">${esc(c.en)}</div>`:""}
+    ${c.addr?`<div class="ad">${esc(c.addr)}</div>`:""}
+    ${c.addrEn&&c.addrEn!==c.addr?`<div class="ad" style="color:var(--muted)">${esc(c.addrEn)}</div>`:""}
+    <a class="ph" href="tel:${c.tel.indexOf('+')===0?c.tel:macauTel(c.tel)}">☎ ${esc(c.tel)}${c.note?` （${esc(c.note)}）`:""}</a>
+  </div>`);
+});
+
+// 學會職務
+out.push('<div class="sec-h">學會職務</div>');
+C.societies.forEach(s=>{
+  out.push(`<div class="soc">
+    <div class="nm">${esc(s.zh)}</div>
+    <div class="en">${esc(s.en)}</div>
+    <div class="rl">${esc(s.role)}</div>
+  </div>`);
+});
+document.getElementById("body").innerHTML=out.join("");
+
+// vCard builder
+function buildVCF(){
+  const lines=[
+    "BEGIN:VCARD","VERSION:3.0",
+    "FN:"+C.full,
+    "N:Ng;Billy;C.H.;Dr.;",
+    "NICKNAME:吳志豪",
+    "TITLE:澳門註冊西醫 (全科 / 皮膚科 / 醫學美容) — Registered Medical Practitioner (Macao) — General Practice / Dermatology / Aesthetic Medicine",
+    "TITLE:醫務顧問 — Medical Advisor"
+  ];
+  C.phones.forEach(p=>lines.push("TEL;TYPE=CELL:"+p.t));
+  lines.push("EMAIL;TYPE=INTERNET:"+C.email);
+  C.clinics.forEach(c=>{
+    lines.push("TEL;TYPE=WORK:"+(c.tel.indexOf("+")===0?c.tel:macauTel(c.tel)));
+    if(c.addr) lines.push("ADR;TYPE=WORK:;;"+c.addr+";;;Macao");
+  });
+  C.societies.forEach(s=>lines.push("TITLE:"+s.zh+" "+s.role));
+  lines.push("END:VCARD");
+  return lines.join("\n");
+}
+document.getElementById("saveBtn").addEventListener("click",()=>{
+  const blob=new Blob([buildVCF()],{type:"text/vcard;charset=utf-8"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download="Dr_C_H_Ng_Billy.vcf";
+  document.body.appendChild(a); a.click(); a.remove();
+});
+document.getElementById("shareBtn").addEventListener("click",(e)=>{
+  e.preventDefault();
+  const u=location.href;
+  if(navigator.share){navigator.share({title:C.full,url:u}).catch(()=>{});}
+  else{ navigator.clipboard&&navigator.clipboard.writeText(u); alert("網址已複製：\n"+u); }
+});
+(function(){
+  const img=document.getElementById("qr");
+  img.src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=0&data="+encodeURIComponent(location.href);
+  img.onerror=()=>{img.style.display="none";
+    img.insertAdjacentHTML("afterend",'<div class="cap">網址：'+location.href+'</div>');};
+})();
+</script>
+</body>
+</html>
